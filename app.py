@@ -114,7 +114,7 @@ def hook():
                 print(f"image_url {image_url}")
                 # logging.info(f"{mobile} image_url {image_url}")
                 image_filename = messenger.download_media(image_url, mime_type)
-                print('image_filename',image_filename)
+                print('image_filenamge',image_filename)
                 # print(f"{mobile} sent image {image_filename}")
                 # logging.info('image_filename',image_filename)
 
