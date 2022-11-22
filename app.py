@@ -184,7 +184,8 @@ def create_pet():
     messenger.send_message(name, recipient_id="923462901820")
 
 
-    return jsonify({"success": True, "response": "Pet added"})
+    return jsonify({"success": True, "response": "Pet addedh"
+                                                 ""})
 @app.route('/sendimage', methods=['POST'])
 def upload_image1():
     if 'file' not in request.files:
