@@ -176,8 +176,8 @@ def hook():
             elif message_type == "document":
                 if "messages" in data:
                     if "file" in data["messages"][0]:
-                        l=data["messages"][0]["document"][0]["id"]
-                        k= data["messages"][0]["document"][0]["mime_type"]
+                        l=data["messages"][0]["document"]["id"]
+                        k= data["messages"][0]["document"]["mime_type"]
 
                         p = messenger.download_media(l, k)
                         print(p)
