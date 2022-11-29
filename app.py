@@ -176,19 +176,25 @@ def hook():
             elif message_type == "document":
                 if "messages" in data:
                     if "file" in data["messages"][0]:
-                        return data["messages"][0]["document"]
+                        l=data["messages"][0]["document"][0]["id"]
+                        k= data["messages"][0]["document"][0]["mime_type"]
+
+                        p = messenger.download_media(l, k)
+                        print(p)
+
+
                 mobile = messenger.get_mobile(data)
                 name = messenger.get_name(data)
-                file = get_file(data)
-                file_id, mime_type = file["id"], file["mime_type"]
-                whatsapp=WhatsApp(environ.get("TOKEN"), phone_number_id=environ.get("PHONE_NUMBER_ID"))
-
-                l = whatsapp.download_media(file_id, mime_type)
-                file_url = messenger.query_media_url(file_id)
-                print(f" file_url {file_url}")
-                # logging.info(f"{mobile} file_url {file_url}")
-                file_filename = messenger.download_media(file_url, mime_type)
-                print('file_filename', file_filename)
+                # file = get_file(data)
+                # file_id, mime_type = file["id"], file["mime_type"]
+                # whatsapp=WhatsApp(environ.get("TOKEN"), phone_number_id=environ.get("PHONE_NUMBER_ID"))
+                #
+                #
+                # file_url = messenger.query_media_url(p)
+                # print(f" file_url {file_url}")
+                # # logging.info(f"{mobile} file_url {file_url}")
+                # file_filename = messenger.download_media(file_url, mime_type)
+                # print('file_filename', file_filename)
                 # print(f"{mobile} sent file {file_filename}")
                 # logging.info('file_filename', file_filename)
             else:
