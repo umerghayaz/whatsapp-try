@@ -42,6 +42,23 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(level
 )
 
 
+def get_file(self, data):
+    """
+    Extracts the audio of the sender from the data received from the webhook.
+
+    Args:
+        data[dict]: The data received from the webhook
+
+    Returns:
+        dict: The audio of the sender
+
+    Example:
+
+    """
+    data = self.preprocess(data)
+    if "messages" in data:
+        if "file" in data["messages"][0]:
+            return data["messages"][0]["document"]
 @app.route("/webhook", methods=["GET", "POST"])
 def hook():
     if request.method == "GET":
@@ -146,11 +163,17 @@ def hook():
                 # print(f" sent audio {audio_filename}")
                 # logging.info('audio_filename', audio_filename)
 
-            elif message_type == "file":
+            elif message_type == "document":
+                if "messages" in data:
+                    if "file" in data["messages"][0]:
+                        return data["messages"][0]["document"]
                 mobile = messenger.get_mobile(data)
                 name = messenger.get_name(data)
                 file = messenger.get_file(data)
                 file_id, mime_type = file["id"], file["mime_type"]
+                whatsapp=WhatsApp(environ.get("TOKEN"), phone_number_id=environ.get("PHONE_NUMBER_ID"))
+
+                l = whatsapp.download_media(file_id, mime_type)
                 file_url = messenger.query_media_url(file_id)
                 print(f" file_url {file_url}")
                 # logging.info(f"{mobile} file_url {file_url}")
