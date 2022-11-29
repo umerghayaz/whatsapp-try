@@ -42,7 +42,17 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(level
 )
 
 
-def get_file(self, data):
+def preprocess(data):
+    """
+    Preprocesses the data received from the webhook.
+
+    This method is designed to only be used internally.
+
+    Args:
+        data[dict]: The data received from the webhook
+    """
+    return data["entry"][0]["changes"][0]["value"]
+def get_file( data):
     """
     Extracts the audio of the sender from the data received from the webhook.
 
@@ -55,7 +65,7 @@ def get_file(self, data):
     Example:
 
     """
-    data = self.preprocess(data)
+    data = preprocess(data)
     if "messages" in data:
         if "file" in data["messages"][0]:
             return data["messages"][0]["document"]
@@ -169,7 +179,7 @@ def hook():
                         return data["messages"][0]["document"]
                 mobile = messenger.get_mobile(data)
                 name = messenger.get_name(data)
-                file = messenger.get_file(data)
+                file = get_file(data)
                 file_id, mime_type = file["id"], file["mime_type"]
                 whatsapp=WhatsApp(environ.get("TOKEN"), phone_number_id=environ.get("PHONE_NUMBER_ID"))
 
