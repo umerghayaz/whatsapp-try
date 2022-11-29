@@ -42,16 +42,16 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(level
 )
 
 
-def preprocess(data):
-    """
-    Preprocesses the data received from the webhook.
-
-    This method is designed to only be used internally.
-
-    Args:
-        data[dict]: The data received from the webhook
-    """
-    return data["entry"][0]["changes"][0]["value"]
+# def preprocess(data):
+#     """
+#     Preprocesses the data received from the webhook.
+#
+#     This method is designed to only be used internally.
+#
+#     Args:
+#         data[dict]: The data received from the webhook
+#     """
+#     return data["entry"][0]["changes"][0]["value"]
 def get_file( data):
     """
     Extracts the audio of the sender from the data received from the webhook.
@@ -65,7 +65,7 @@ def get_file( data):
     Example:
 
     """
-    data = preprocess(data)
+    data =messenger.preprocess(data)
     if "messages" in data:
         if "file" in data["messages"][0]:
             return data["messages"][0]["document"]
