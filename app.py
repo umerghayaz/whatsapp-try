@@ -173,7 +173,7 @@ def hook():
                 # print(f" sent audio {audio_filename}")
                 # logging.info('audio_filename', audio_filename)
 
-            elif message_type == "document":
+            elif message_type == "file":
                 # if "messages" in data:
                 #     if "file" in data["messages"][0]:
                 #         l=data["messages"][0]["document"]["id"]
