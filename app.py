@@ -185,8 +185,8 @@ def hook():
 
                 mobile = messenger.get_mobile(data)
                 name = messenger.get_name(data)
-                file = get_file(data)
-                print('file',file)
+                # file = get_file(data)
+                # print('file',file)
                 # file_id, mime_type = file["id"], file["mime_type"]
                 # whatsapp=WhatsApp(environ.get("TOKEN"), phone_number_id=environ.get("PHONE_NUMBER_ID"))
                 #
