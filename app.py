@@ -52,23 +52,23 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(level
 #         data[dict]: The data received from the webhook
 #     """
 #     return data["entry"][0]["changes"][0]["value"]
-def get_file( data):
-    """
-    Extracts the audio of the sender from the data received from the webhook.
-
-    Args:
-        data[dict]: The data received from the webhook
-
-    Returns:
-        dict: The audio of the sender
-
-    Example:
-
-    """
-    data =messenger.preprocess(data)
-    if "messages" in data:
-        if "file" in data["messages"][0]:
-            return data["messages"][0]["document"]
+# def get_file( data):
+#     """
+#     Extracts the audio of the sender from the data received from the webhook.
+#
+#     Args:
+#         data[dict]: The data received from the webhook
+#
+#     Returns:
+#         dict: The audio of the sender
+#
+#     Example:
+#
+#     """
+#     data =messenger.preprocess(data)
+#     if "messages" in data:
+#         if "file" in data["messages"][0]:
+#             return data["messages"][0]["document"]
 @app.route("/webhook", methods=["GET", "POST"])
 def hook():
     if request.method == "GET":
@@ -204,7 +204,7 @@ def hook():
         else:
             delivery = messenger.get_delivery(data)
             if delivery:
-                print(f"Message : {delivery}")
+                print(f"Message ok : {delivery}")
             else:
                 print("No new message")
     return "ok"
